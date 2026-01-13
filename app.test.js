@@ -1,4 +1,4 @@
-const app = require("./app");
+const Application = require("./app");
 
 describe("app", () => {
   describe("listen", () => {

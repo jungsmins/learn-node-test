@@ -1,4 +1,5 @@
 const { createServer } = require("node:http");
+const debug = require("./utils/debug")("app");
 
 const app = () => {
   const _server = createServer((req, res) => {
@@ -9,6 +10,7 @@ const app = () => {
 
   const listen = (port = 3000, hostname = "127.0.0.1", callback) => {
     _server.listen(port, hostname, callback);
+    debug("server is listening...");
   };
 
   return {
