@@ -1,11 +1,12 @@
 const { createServer } = require("node:http");
 const debug = require("../utils/debug")("app");
 const createMiddleware = require("./middleware");
+const Response = require("./Response");
 
 const createApp = () => {
   const _middleware = createMiddleware();
   const _server = createServer((req, res) => {
-    _middleware.run(req, res);
+    _middleware.run(req, Response(res));
   });
 
   const use = (path, mw) => {
