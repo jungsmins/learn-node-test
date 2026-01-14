@@ -1,4 +1,4 @@
-const middleware = () => {
+const createMiddleware = () => {
   const _middlewares = [];
   let _req, _res;
 
@@ -9,7 +9,6 @@ const middleware = () => {
   const run = (req, res) => {
     _req = req;
     _res = res;
-
     _run(0);
   };
 
@@ -20,9 +19,9 @@ const middleware = () => {
     const next = (err) => _run(index + 1, err);
 
     if (err) {
-      const isNextErrorMw = nextMw.length === 4;
+      const isErrorHandler = nextMw.length === 4;
 
-      return isNextErrorMw
+      return isErrorHandler
         ? nextMw(err, _req, _res, next)
         : _run(index + 1, err);
     }
@@ -37,4 +36,4 @@ const middleware = () => {
   };
 };
 
-module.exports = middleware;
+module.exports = createMiddleware;

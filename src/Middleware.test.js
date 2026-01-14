@@ -1,10 +1,10 @@
-const Middleware = require("./middleware");
+const createMiddleware = require("./middleware");
 
 describe("Middleware", () => {
   let middleware;
 
   beforeEach(() => {
-    middleware = Middleware();
+    middleware = createMiddleware();
   });
 
   test("미들웨어의 초기값은 빈 배열이다.", () => {

@@ -14,31 +14,34 @@ describe("debug", () => {
   });
 
   describe("반환된 함수", () => {
-    let debug, tag, msg;
+    let debugFn, tag, msg;
     const ansiColorPattern = /\x1b\[\d+m/;
-    const resetColor = "\x1b[0m";
+    const RESET_COLOR = "\x1b[0m";
 
     beforeEach(() => {
       tag = "test";
-      debug = require("./debug")(tag);
+      debugFn = require("./debug")(tag);
       msg = "디버그 메세지";
     });
 
     test("tag와 msg를 조합하여 로그 문자열을 반환한다. (컬러 코드 포함)", () => {
-      const actual = debug(msg);
+      const actual = debugFn(msg);
 
       expect(actual).toMatch(ansiColorPattern);
       expect(actual).toContain(tag);
       expect(actual).toContain(msg);
-      expect(actual).toContain(resetColor);
+      expect(actual).toContain(RESET_COLOR);
     });
 
     test("로그 문자열을 인자로 받아 콘솔에 출력한다.", () => {
       const spy = jest.spyOn(console, "log");
 
-      const result = debug(msg);
+      const result = debugFn(msg);
 
       expect(spy).toHaveBeenCalledWith(result);
+
+      // cleanup
+      spy.mockRestore();
     });
   });
 });
