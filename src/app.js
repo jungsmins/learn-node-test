@@ -3,10 +3,12 @@ const debug = require("../utils/debug")("app");
 const fs = require("node:fs");
 const path = require("node:path");
 const serverStatic = require("./server-static");
+const Middleware = require("./middleware");
 
 const app = () => {
+  const _middleware = Middleware();
   const _server = createServer((req, res) => {
-    serverStatic(req, res);
+    _middleware.run(req, res);
 
     res.statusCode = 200;
     res.setHeader("Content-type", "text/html");
@@ -21,14 +23,18 @@ const app = () => {
     });
   });
 
+  const use = (mw) => _middleware.add(mw);
+
   const listen = (port = 3000, hostname = "127.0.0.1", callback) => {
     _server.listen(port, hostname, callback);
     debug("server is listening...");
   };
 
   return {
+    _middleware,
     _server,
     listen,
+    use,
   };
 };
 
