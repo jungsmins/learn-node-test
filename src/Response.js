@@ -21,8 +21,8 @@ const Response = (res) => {
     ((text) => {
       if (!res.getHeader("Content-Type")) {
         res.setHeader("Content-Type", "text/plain");
-        return res.end(text);
       }
+      return res.end(text);
     });
 
   res.json =

@@ -23,7 +23,7 @@ const loadPosts = (el) => {
 
 const api = {
   getPosts: () => {
-    return fetch("api/posts").then((res) => res.json());
+    return fetch("api/posts?limit=2&page=1").then((res) => res.json());
   },
 };
 

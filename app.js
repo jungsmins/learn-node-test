@@ -4,7 +4,7 @@ const { error404, errorHandler } = require("./middlewares/error");
 const serveStatic = require("./middlewares/server-static");
 const debug = require("./utils/debug")("bin");
 const logger = require("./middlewares/logger");
-const apiPost = require("./routes/api/post");
+const apiPost = require("./routes/api/posts");
 
 const hostname = "127.0.0.1";
 const port = 3000;
