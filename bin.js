@@ -1,4 +1,4 @@
-const app = require("./app")();
+const app = require("./src/app")();
 const debug = require("./utils/debug")("bin");
 
 const hostname = "127.0.0.1";
