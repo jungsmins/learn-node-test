@@ -9,6 +9,7 @@ const createMiddleware = () => {
   const run = (req, res) => {
     _req = req;
     _res = res;
+
     _run(0);
   };
 
@@ -24,6 +25,12 @@ const createMiddleware = () => {
       return isErrorHandler
         ? nextMw(err, _req, _res, next)
         : _run(index + 1, err);
+    }
+
+    if (nextMw._path) {
+      const pathMatched = _req.url === nextMw._path;
+
+      return pathMatched ? nextMw(_req, _res, next) : _run(index + 1, err);
     }
 
     nextMw(_req, _res, next);

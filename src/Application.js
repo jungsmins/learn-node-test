@@ -8,7 +8,17 @@ const createApp = () => {
     _middleware.run(req, res);
   });
 
-  const use = (mw) => _middleware.add(mw);
+  const use = (path, mw) => {
+    if (typeof path === "string" && typeof mw === "function") {
+      mw._path = path;
+    } else if (typeof path === "function") {
+      mw = path;
+    } else {
+      throw new Error("Usage: use(path, fn) or use(fn)");
+    }
+
+    _middleware.add(mw);
+  };
 
   const listen = (port = 3000, hostname = "127.0.0.1", callback) => {
     _server.listen(port, hostname, callback);
