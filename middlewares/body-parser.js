@@ -7,7 +7,6 @@ const bodyParser = (req, res, next) => {
 
   req.on("end", () => {
     body = Buffer.concat(body).toString();
-    console.log("Raw Body:", body);
 
     body = body.split("&").reduce((obj, pair) => {
       if (!pair) return obj;
@@ -16,11 +15,10 @@ const bodyParser = (req, res, next) => {
       return obj;
     }, {});
 
-    console.log(body);
     req.body = body;
-  });
 
-  next();
+    next();
+  });
 };
 
 module.exports = bodyParser;
