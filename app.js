@@ -15,7 +15,8 @@ const app = createApp();
 app.use(logger);
 app.use(serveStatic);
 app.use("/", index.listPosts);
-app.use("/api/posts", apiPost.index);
+app.get("/api/posts", apiPost.index);
+app.post("/api/posts", apiPost.create);
 app.use(error404);
 app.use(errorHandler);
 

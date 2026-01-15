@@ -1,3 +1,5 @@
+const debug = require("../../utils/debug")("app:posts");
+
 const posts = [
   { title: "post 3", body: "this is post 3" },
   { title: "post 2", body: "this is post 2" },
@@ -14,6 +16,11 @@ const index = (req, res, next) => {
   res.json(posts.slice(begin, end));
 };
 
+const create = (req, res, next) => {
+  debug("create post");
+};
+
 module.exports = {
   index,
+  create,
 };

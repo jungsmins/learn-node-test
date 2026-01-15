@@ -28,11 +28,25 @@ const createApp = () => {
     debug("server is listening...");
   };
 
+  const get = (path, mw) => {
+    if (!path || !mw) throw new Error("Usage: get(path, fn)");
+    mw._method = "get";
+    use(path, mw);
+  };
+
+  const post = (path, mw) => {
+    if (!path || !mw) throw new Error("Usage: post(path, fn)");
+    mw._method = "post";
+    use(path, mw);
+  };
+
   return {
     _middleware,
     _server,
     listen,
     use,
+    get,
+    post,
   };
 };
 

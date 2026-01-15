@@ -28,7 +28,9 @@ const createMiddleware = () => {
     }
 
     if (nextMw._path) {
-      const pathMatched = _req.path === nextMw._path;
+      const pathMatched =
+        _req.path === nextMw._path &&
+        _req.method.toLowerCase() === (nextMw._method || "get");
 
       return pathMatched ? nextMw(_req, _res, next) : _run(index + 1, err);
     }

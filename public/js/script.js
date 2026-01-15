@@ -28,3 +28,27 @@ const api = {
 };
 
 loadPosts(el);
+
+const inputTitle = document.getElementById("title");
+const inputBody = document.getElementById("body");
+const submitBtn = document.getElementById("sub-btn");
+
+console.log(inputTitle.value, inputBody.value);
+
+const createPost = () => {
+  const title = inputTitle.value;
+  const body = inputBody.value;
+
+  fetch("api/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title,
+      body,
+    }),
+  });
+};
+
+submitBtn.addEventListener("click", createPost);
